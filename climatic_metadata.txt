@@ -1,0 +1,27 @@
+There is a representative dataset for each state in the study. The assumption is that the weather station selected is representative of the entire study area. This is a bit of a stretch, but should hold more or less. The data was retrieved from NOAA's climate data portal. 
+
+Indiana - Bloomington Indiana University, USC00120784
+
+Iowa - Iowa Falls, USC00134142
+
+Kentucky - Monticello 3 NE, USC00155524 
+
+Louisiana - Rustin LA Tech, USC00168067
+
+Michigan - Grayling, USC00203391 
+
+Mississippi - Newton Experimental Station, USC00226308 
+
+Ohio - Urbana WWTP, USC00338552
+
+Tennessee - Clarksville Sewage Plant, USC00401790 
+
+Wisconsin - Cumberland, USC00471923
+
+
+To begin, these values were summarized for every year in the state datasets
+ - Number of days below freezing on a monthly and yearly basis
+ - Number of days above 90F on a monthly and yearly basis
+ - Total monthly and yearly precipitation
+  
+To make a flat file for the regression, observations were created for every year and state of interest (45 observations). Each observation is composed of the year, the state, and the climate summary data from the present year and the five previous years. Each observation has 236 data points. 
