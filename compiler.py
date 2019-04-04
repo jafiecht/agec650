@@ -7,12 +7,27 @@ filenames = os.listdir('raw_data')
 #Years of interest
 years = [1991, 1996, 2001, 2006, 2011]
 
+#Length of the winter solstice
+daylight = {
+  'indiana': 9.33,
+  'ohio': 9.33,
+  'michigan': 9.03,
+  'illinois': 9.27,
+  'iowa': 9.05,
+  'kentucky': 9.53,
+  'mississippi': 10.02,
+  'tennessee': 9.68,
+  'wisconsin': 8.98,
+  'louisiana': 10.20,
+}
+
 #Names of the data to be summarized annually
-annual_names = ['year', 'janprcp', 'febprcp', 'marprcp', 'aprprcp', 'mayprcp', 'junprcp', 'julprcp', 'augprcp', 'sepprcp', 'octprcp', 'novprcp', 'decprcp', 'totprcp', 'jancold', 'febcold', 'marcold', 'aprcold', 'maycold', 'juncold', 'julcold', 'augcold', 'sepcold', 'octcold', 'novcold', 'deccold', 'totcold', 'janheat', 'febheat', 'marheat', 'aprheat', 'mayheat', 'junheat', 'julheat', 'augheat', 'sepheat', 'octheat', 'novheat', 'decheat', 'totheat']
+#annual_names = ['year', 'janprcp', 'febprcp', 'marprcp', 'aprprcp', 'mayprcp', 'junprcp', 'julprcp', 'augprcp', 'sepprcp', 'octprcp', 'novprcp', 'decprcp', 'totprcp', 'jancold', 'febcold', 'marcold', 'aprcold', 'maycold', 'juncold', 'julcold', 'augcold', 'sepcold', 'octcold', 'novcold', 'deccold', 'totcold', 'janheat', 'febheat', 'marheat', 'aprheat', 'mayheat', 'junheat', 'julheat', 'augheat', 'sepheat', 'octheat', 'novheat', 'decheat', 'totheat']
+annual_names = ['year', 'totprcp', 'totcold', 'totheat']
 
 ##################################################
 #Create a dataframe to write to
-col_names = ['year', 'state'] + annual_names[1:]
+col_names = ['year', 'state', 'daylight'] + annual_names[1:]
 for i in range(1,6):
   for annual_name in annual_names[1:]:
     col_names.append(annual_name + '_' + str(i))
@@ -47,11 +62,11 @@ def yearly(year):
   
   #Amalgomate
   summary = list()
-  summary = summary + prcp_summary
+  #summary = summary + prcp_summary
   summary.append(total_prcp)
-  summary = summary + cold_summary
+  #summary = summary + cold_summary
   summary.append(total_cold)
-  summary = summary + heat_summary
+  #summary = summary + heat_summary
   summary.append(total_heat)
   return summary
 
@@ -80,7 +95,7 @@ for filename in filenames:
     #annual[col_name] = annual[col_name] / average
  
   for year in years:
-    row = [year, state] 
+    row = [year, state, daylight[state]] 
     primary =  annual.loc[(annual['year'] == year)].values.tolist()[0][1:]
     lag1 = annual.loc[(annual['year'] == (year-1))].values.tolist()[0][1:]
     lag2 = annual.loc[(annual['year'] == (year-2))].values.tolist()[0][1:]
